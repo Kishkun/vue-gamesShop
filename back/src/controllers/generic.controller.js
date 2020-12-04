@@ -1,6 +1,8 @@
 const boom = require('boom');
 
 const genericCrud = (model) => ({
+
+  //get
   async get({params: {id}}, res) {
     try {
       const item = await model.findById(id)
@@ -9,6 +11,8 @@ const genericCrud = (model) => ({
       return res.status(400).send(boom.boomify(err), {message: 'Упс! Что то пошло не так... :('});
     }
   },
+
+  //get
   async getAll(req, res) {
     try {
       const items = await model.find()
@@ -17,6 +21,8 @@ const genericCrud = (model) => ({
       return res.status(400).send(boom.boomify(err), {message: 'Упс! Что то пошло не так... :('});
     }
   },
+
+  //post
   async create({body}, res) {
     try {
       const item = new model(body);
@@ -26,6 +32,8 @@ const genericCrud = (model) => ({
       return res.status(400).send(boom.boomify(err), {message: 'Упс! Что то пошло не так... :('});
     }
   },
+
+  //put
   async update({params: {id}, body}, res) {
     try {
       const item = await model.findByIdAndUpdate(id, body, {new: true});
@@ -34,6 +42,8 @@ const genericCrud = (model) => ({
       return res.status(400).send(boom.boomify(err), {message: 'Упс! Что то пошло не так... :('});
     }
   },
+
+  //delete
   async delete({params: {id}}, res) {
     try {
       await model.findByIdAndDelete(id);
