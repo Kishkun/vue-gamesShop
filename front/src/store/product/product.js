@@ -1,41 +1,46 @@
-import {getProduct} from '../../../services/products.service';
+import {getProduct, getProducts} from '../../../services/products.service';
+
+const state = () => ({
+  product: {},
+  products: []
+});
 
 const mutations = {
-  async SET_PRODUCT(state, product) {
+  SET_PRODUCT(state, product) {
     state.product = product
   },
-  async FETCH_PRODUCTS({commit}, products) {
+  SET_PRODUCTS(state, products) {
     state.products = products
   }
-}
+};
+
 const actions = {
   async FETCH_PRODUCT({commit}, id) {
     try {
-      const product = await getProduct(id)
-      commit('SET_PRODUCT', product)
+      const res = await getProduct(id);
+      if (res.status && res.data.items) {
+        commit('SET_PRODUCT', res.data)
+      }
     } catch (err) {
       commit('error/SET_PRODUCT_ERROR', err, {root: true})
     }
   },
   async FETCH_PRODUCTS({commit}) {
     try {
-      const products = await getProduct()
-      commit('FETCH_PRODUCTS', products)
+      const res = await getProducts();
+      if (res.status && res.data.items) {
+        commit('SET_PRODUCTS', res.data.items)
+      }
     } catch (err) {
       commit('error/SET_PRODUCT_ERROR', err, {root: true})
     }
   }
-}
+};
 
 const getters = {
   product: state => state.product,
   products: state => state.products,
-}
-
-const state = () => ({
-  product: {},
-  products: []
-})
+};
 
 export default {
   namespaced: true,

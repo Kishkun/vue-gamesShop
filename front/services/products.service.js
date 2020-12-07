@@ -1,11 +1,11 @@
-import {request} from './generic.service'
+import {request} from './generic.service';
 
-export const getProduct = (id) => request({
-  url: `/products/${id}`,
+export const getProduct = id => request({
+  url: `products/${id}`,
   method: 'get'
-})
+});
 
 export const getProducts = () => request({
-  url: '/products',
+  url: `products`,
   method: 'get'
-})
+});
