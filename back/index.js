@@ -5,10 +5,15 @@ const http = require('http');
 const cors = require('cors');
 const {routes} = require('./src/routes');
 
+const dotenv = require('dotenv');
+const result = dotenv.config();
+
+if (result.error) {
+  throw result.error
+}
+
 // settings connection to db
-mongoose.connect(
-    'mongodb://localhost:27017/gamesShop',
-    {
+mongoose.connect(process.env.MONGO_URI, {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true
