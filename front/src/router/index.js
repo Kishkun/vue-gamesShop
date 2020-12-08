@@ -7,12 +7,12 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: 'home" */ '../views/Home')
+    component: () => import(/* webpackChunkName: 'home' */ '../views/Home')
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: () => import(/* webpackChunkName: 'cart" */ '../views/Cart')
+    component: () => import(/* webpackChunkName: 'cart' */ '../views/Cart')
   }
 ];
 

@@ -1,6 +1,7 @@
 const state = () => ({
   productError: null,
-  categoryError: null
+  categoryError: null,
+  paymentError: null
 });
 
 const mutations = {
@@ -8,13 +9,17 @@ const mutations = {
     state.productError = error
   },
   SET_CATEGORY_ERROR(state, error) {
-    state.productError = error
+    state.categoryError = error
+  },
+  SET_PAYMENT_ERROR(state, error) {
+    state.paymentError = error
   }
 };
 
 const getters = {
   productError: state => state.productError,
   categoryError: state => state.categoryError,
+  paymentError: state => state.paymentError,
 };
 
 export default {

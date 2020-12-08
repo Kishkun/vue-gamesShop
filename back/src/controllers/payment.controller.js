@@ -15,6 +15,15 @@ const createPaymentIntent = async ({body: {amount}}, res) => {
   }
 };
 
+const stripeWebHook = async ({body}, res) => {
+  try {
+
+  } catch (err) {
+    console.log(err)
+  }
+};
+
 module.exports = {
-  createPaymentIntent
+  createPaymentIntent,
+  stripeWebHook
 };

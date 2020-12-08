@@ -1,3 +1,5 @@
+import {getPaymentIntent} from '../../../services/payment.service';
+
 const state = () => ({
   cart: {
     total: 0
@@ -11,7 +13,20 @@ const mutations = {
   },
   DELETE_FROM_CART(state, product) {
     state.cartItems = state.cartItems.filter(items => items._id !== product._id)
+  },
+  CLEAR_CART(state) {
+    state.cartItems = []
   }
+};
+
+const actions = {
+  async PAY_ITEMS({commit, getters}) {
+    try {
+      return await getPaymentIntent({amount: getters.cartTotalPrice})
+    } catch (err) {
+      commit('error/SET_PAYMENT_ERROR', err, {root: true})
+    }
+  },
 };
 
 const getters = {
@@ -24,5 +39,6 @@ export default {
   namespaced: true,
   state,
   mutations,
+  actions,
   getters
 }

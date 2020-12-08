@@ -13,7 +13,7 @@
     components: {Header},
     data: () => ({}),
     mounted() {
-        this.fetchCategories();
+      this.fetchCategories();
     },
     computed: {
       ...mapGetters({
