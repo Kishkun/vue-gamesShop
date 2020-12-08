@@ -2,17 +2,18 @@
   <div class="product">
     <div class="product__list">
       <ProductCard
-          v-for="(product, i) in products" :key="i"
-          :title="product.title"
-          :price="product.price"
-          :imageUrl="product.imageUrl"
+          v-for="product in products" :key="product._id"
+          :product="product"
+          :inCart="cartItemsIds.includes(product._id)"
+          @addToCart="addToCart(product)"
+          @deleteFromCart="deleteFromCart(product)"
       />
     </div>
   </div>
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapGetters, mapActions, mapMutations } from 'vuex'
   
   import ProductCard from '../components/layouts/ProductCard'
 
@@ -24,8 +25,10 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      products: 'product/products'
-    })
+      products: 'product/products',
+      cartItems: 'cart/cartItems'
+    }),
+    cartItemsIds: ({cartItems}) => cartItems.map(({_id}) => _id)
   },
   mounted() {
     this.fetchProducts()
@@ -33,6 +36,10 @@ export default {
   methods: {
     ...mapActions({
       fetchProducts: 'product/FETCH_PRODUCTS'
+    }),
+    ...mapMutations({
+      addToCart: 'cart/ADD_TO_CART',
+      deleteFromCart: 'cart/DELETE_FROM_CART'
     })
   }
 }
@@ -44,7 +51,6 @@ export default {
   
     &__list {
       display: flex;
-      align-items: center;
       justify-content: space-around;
       padding: 30px;
     }
