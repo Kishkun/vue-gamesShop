@@ -4,29 +4,36 @@
             <font-awesome-icon icon="shopping-cart"/>
         </h2>
         <template v-if="cartItems.length > 0">
-            <ul class="list-group">
-                <li class="list-group-item" v-for="(item, i) in cartItems" :key="i">
-                    {{item.title}} - {{item.price}}$
-                </li>
-            </ul>
-            <div class="panel text-right pt-3">
-                Кол-во: {{ cartCount }},
-                <br/>
-                Итого: {{ cartTotalPrice }}$
-                <hr/>
-            </div>
-            <button class="btn btn-success mt-3" @click="handelGetPaymentIntent" v-if="!paymentIntent">Pay</button>
-            <template v-else>
-                <Card class="stripe__card"
+            <template v-if="!paymentIntent">
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="(item, i) in cartItems" :key="i">
+                        {{item.title}} - {{item.price}}$
+                    </li>
+                </ul>
+                <div class="panel text-right pt-3">
+                    Кол-во: {{ cartCount }},
+                    <br/>
+                    Итого: {{ cartTotalPrice }}$
+                    <hr/>
+                </div>
+            </template>
+            
+            <template v-if="!paymentIntent">
+                <UserForm @onFormSubmit="handelGetPaymentIntent" :isReset="paymentIntent"/>
+            </template>
+            
+            <template v-if="paymentIntent">
+                <Card class="stripe__card my-4"
                       ref="card"
                       :class="{ complete }"
                       :stripe="stripeKey"
                       :options="stripeOptions"
                       @change="complete = $event.complete"
                 />
-                <button class="btn btn-success mt-3" @click="pay">Pay with credit card</button>
+                <button class="btn btn-success" @click="pay">Pay with credit card</button>
             </template>
         </template>
+      
         <template v-else>
             <img class="empty_image"
                  src="https://images.pexels.com/photos/21067/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
@@ -39,10 +46,11 @@
 <script>
   import {mapGetters, mapActions, mapMutations} from 'vuex'
   import {Card, handleCardPayment} from 'vue-stripe-elements-plus'
+  import UserForm from '../components/UserForm';
 
   export default {
     name: 'Cart',
-    components: {Card},
+    components: {Card, UserForm},
     props: {},
     data: () => ({
       complete: false,
@@ -71,9 +79,16 @@
         clearCart: 'cart/CLEAR_CART',
       }),
 
-      async handelGetPaymentIntent() {
-        const intent = await this.handelPay();
-        this.paymentIntent = intent.data.client_secret
+      async handelGetPaymentIntent(form) {
+        try {
+          const intent = await this.handelPay({
+            ...form,
+            products: this.cartItems
+          });
+          this.paymentIntent = intent.data.paymentIntent.client_secret
+        } catch (err) {
+          console.log(err)
+        }
       },
       async pay() {
         try {

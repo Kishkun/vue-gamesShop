@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div v-for="product in products" :key="product._id" class="col-lg-4 col-md-6 mb-4">
+        <div v-for="product in products" :key="product._id" class="col-lg-4 col-md-6 mb-5">
             <ProductCard
                 :product="product"
                 :inCart="cartItemsIds.includes(product._id)"
@@ -13,7 +13,7 @@
 <script>
   import {mapGetters, mapActions, mapMutations} from 'vuex'
 
-  import ProductCard from '../components/layouts/ProductCard'
+  import ProductCard from '../components/ProductCard'
 
   export default {
     name: 'Home',

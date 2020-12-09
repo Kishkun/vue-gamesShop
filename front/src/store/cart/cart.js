@@ -20,9 +20,12 @@ const mutations = {
 };
 
 const actions = {
-  async PAY_ITEMS({commit, getters}) {
+  async PAY_ITEMS({commit, getters}, form) {
     try {
-      return await getPaymentIntent({amount: getters.cartTotalPrice})
+      return await getPaymentIntent({
+        amount: getters.cartTotalPrice,
+        ...form
+      })
     } catch (err) {
       commit('error/SET_PAYMENT_ERROR', err, {root: true})
     }

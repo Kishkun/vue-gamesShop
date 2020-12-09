@@ -1,12 +1,12 @@
 <template>
-    <div class="card h-100 p-3 mb-5">
+    <div class="card h-100 p-2 text-center">
         <a href="#"> <img :src="product.imageUrl" class="card-img-top" alt="image"/></a>
         <div class="card-body p-0 mt-3">
             <h4 class="card-title">
                 <a href="#">{{ product.title }}</a>
             </h4>
             <h5>{{ product.price }}$</h5>
-            <p class="card-text">{{ product.description.slice(0, 80) }}...</p>
+            <p class="card-text px-1">{{ product.description.slice(0, 80) }}...</p>
         </div>
         <div class="card__footer my-3">
             <button class="btn btn-info" @click="handlerAdd" v-if="!inCart">Добавить в корзину</button>
@@ -45,10 +45,5 @@
   }
 </script>
 <style scoped lang="scss">
-    @import './../../style/utils/variables';
-    
-    .card {
-        width: 300px;
-        text-align: center;
-    }
+    @import '../style/utils/variables';
 </style>
