@@ -100,7 +100,6 @@
     }
     
     .stripe__card {
-        width: 300px;
         border: 1px solid grey;
         
         &.complete {

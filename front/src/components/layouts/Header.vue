@@ -1,21 +1,37 @@
 <template>
-    <header class="header">
-        <div class="header__left">
-            <router-link to="/" class="header__logo">LOGO</router-link>
-        </div>
-        <div class="header__right">
-            <router-link to="/cart" class="header-cart__link">
-                <font-awesome-icon icon="shopping-cart" /> {{cartCount}}
-            </router-link>
-            <nav class="nav">
-                <ul class="nav__list">
-                    <li class="nav__item" v-for="(category, i) in categories" :key="i">
-                        <router-link :to="`category/${category.id}`" class="nav__link">{{category.title}}</router-link>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <router-link class="navbar-brand" to="/">In Games We Trust</router-link>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav_link"
+                        v-for="(category, i) in categories"
+                        :key="i"
+                    >
+                        <router-link class="nav-link px-3" :to="`/category/${category._id}`">{{category.title }}
+                        </router-link>
+                    </li>
+                    <li class="nav_link">
+                        <router-link class="nav-link" to="/cart">
+                            <font-awesome-icon icon="shopping-cart"/>
+                            {{ cartCount }}
+                        </router-link>
                     </li>
                 </ul>
-            </nav>
+            </div>
         </div>
-    </header>
+    </nav>
 </template>
 <script>
   export default {
@@ -41,58 +57,4 @@
 </script>
 <style scoped lang="scss">
     @import '../../style/utils/variables';
-    
-    .header {
-        $self: &;
-        border-bottom: 1px solid $black-color;
-        padding: 25px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        text-align: center;
-        
-        &__left {
-        
-        }
-        
-        &__logo {
-            color: $black-color;
-            text-decoration: none;
-        }
-        
-        &__right {
-        
-        }
-    
-        &-cart__link {
-        
-        }
-        
-        .nav {
-            margin-top: 15px;
-            
-            &__list {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-            }
-            
-            &__item {
-                
-                &:not(:last-child) {
-                    margin-right: 35px;
-                }
-            }
-            
-            &__link {
-                color: $black-color;
-                text-decoration: none;
-                transition: .3s;
-                
-                &:hover {
-                    color: $blue_light-color;
-                }
-            }
-        }
-    }
 </style>

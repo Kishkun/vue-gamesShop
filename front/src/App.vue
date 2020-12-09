@@ -1,7 +1,26 @@
 <template>
     <div id="app">
         <Header :categories="categories" :cartCount="cartCount"/>
-        <router-view/>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h1 class="my-4">Categories</h1>
+                    <div class="list-group">
+                        <router-link
+                            v-for="(category, i) in categories"
+                            :key="i"
+                            :to="`/category/${category._id}`"
+                            class="list-group-item"
+                        >
+                            {{ category.title }}
+                        </router-link>
+                    </div>
+                </div>
+                <div class="col-lg-9 margin-s">
+                    <router-view/>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -34,5 +53,14 @@
     
     body #app {
         font-family: 'Lato', sans-serif;
+        padding-top: 56px;
+        
+        .margin-s {
+            margin-top: 95px;
+        }
+        
+        a {
+            text-decoration: none;
+        }
     }
 </style>
