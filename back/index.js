@@ -31,6 +31,6 @@ routes.forEach((item) => {
 });
 
 // declare our routes
-const PORT = 3000;
+const PORT = 4000;
 http.createServer({}, app).listen(PORT);
 console.log(`server running at ${PORT}`);

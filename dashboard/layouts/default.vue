@@ -20,7 +20,10 @@
     components: {Nav, Footer},
     data: () => ({
       menu
-    })
+    }),
+    mounted() {
+
+    },
   }
 </script>
 <style lang="scss">
