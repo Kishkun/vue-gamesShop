@@ -1,11 +1,50 @@
 <template>
   <div class="app">
-    <div class="aside"></div>
+    <Nav :menu="menu" />
     <div class="content">
-      <Nuxt/>
+      <main>
+        <Nuxt/>
+      </main>
+      <Footer />
     </div>
   </div>
 </template>
-<style lang="scss">
+<script>
+  import Nav from '../components/layouts/Nav';
+  import Footer from '../components/layouts/Footer';
 
+  import menu from './setup'
+
+  export default {
+    name: 'DefaultLayout',
+    components: {Nav, Footer},
+    data: () => ({
+      menu
+    })
+  }
+</script>
+<style lang="scss">
+  @import './assets/style/global';
+
+  .app {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      width: 80vw;
+    }
+
+    main {
+      background: $main-bg;
+      height: 90%;
+    }
+  }
 </style>
