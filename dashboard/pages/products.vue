@@ -1,24 +1,29 @@
 <template>
   <div class="container">
-    <h2>This is products page</h2>
+    <h2>This is Products page</h2>
   </div>
 </template>
-
 <script>
+  import {mapActions, mapGetters} from 'vuex'
+
   export default {
-    name: 'Products',
+    name: 'ProductsPage',
     components: {},
     props: {},
     data: () => ({}),
     mounted() {
-
+      this.fetchProducts();
     },
-    computed: {},
-    methods: {},
+    computed: {
+      ...mapGetters({
+        products: 'products/items'
+      })
+    },
+    methods: {
+      ...mapActions({
+        fetchProducts: 'products/FETCH_ALL'
+      })
+    },
     watch: {}
   }
 </script>
-
-<style lang="scss">
-
-</style>

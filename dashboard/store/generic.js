@@ -1,19 +1,19 @@
-import GenericService from '~/services/generic.service';
+import GenericService from '@/services/generic.service';
 
-const crudStore = ({name, url, keyName}) => {
+const crudStore = ({name, url}) => {
   const genericService = new GenericService({url, name});
 
   return {
     state: () => ({
-      // динамические ключи
-      [keyName]: {},
-      [`${keyName}s`]: [],
-      [`${keyName}Error`]: null
+      item: {},
+      items: [],
+      itemError: null
     }),
-    action: {
+    actions: {
       async FETCH_ALL({commit}) {
         try {
           const items = await genericService.fetchAll();
+          console.log(items)
           commit('FETCH_ITEMS_SUCCESS', items)
         } catch (err) {
           commit('FETCH_ITEMS_FAIL', {
@@ -69,44 +69,44 @@ const crudStore = ({name, url, keyName}) => {
     },
     mutations: {
       FETCH_ITEMS_SUCCESS(state, items) {
-        state[`${keyName}s`] = items
+        state.items = items
       },
       FETCH_ITEMS_FAIL(state, error) {
-        state[`${keyName}Error`] = error
+        state.itemError = error
       },
 
       FETCH_ITEM_SUCCESS(state, item) {
-        state[item] = item
+        state.item = item
       },
       FETCH_ITEM_FAIL(state, error) {
-        state[`${keyName}Error`] = error
+        state.itemError = error
       },
 
       CREATE_SUCCESS(state, item) {
-        state[keyName] = item
+        state.item = item
       },
       CREATE_FAIL(state, error) {
-        state[`${keyName}Error`] = error
+        state.itemError = error
       },
 
       UPDATE_SUCCESS(state, item) {
-        state[keyName] = item
+        state.item = item
       },
       UPDATE_FAIL(state, error) {
-        state[`${keyName}Error`] = error
+        state.itemError = error
       },
 
       DELETE_SUCCESS(state, item) {
 
       },
       DELETE_FAIL(state, error) {
-        state[`${keyName}Error`] = error
+        state.itemError = error
       }
     },
     getters: {
-      [keyName]: (state) => state[keyName],
-      [`${keyName}s`]: (state) => state[`${keyName}s`],
-      [`${keyName}Error`]: (state) => state[`${keyName}Error`]
+      item: (state) => state.item,
+      items: (state) => state.items,
+      itemError: (state) => state.itemError
     }
   }
 };

@@ -1,4 +1,4 @@
-import axios from '@nuxtjs/axios'
+import axios from './request.service'
 
 export default class GenericService {
   constructor({url, name}) {

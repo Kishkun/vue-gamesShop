@@ -7,7 +7,7 @@
   import {mapActions, mapGetters} from 'vuex'
 
   export default {
-    name: 'Categories',
+    name: 'CategoriesPage',
     components: {},
     props: {},
     data: () => ({}),
@@ -16,7 +16,7 @@
     },
     computed: {
       ...mapGetters({
-        categories: 'categories/categorys'
+        categories: 'categories/items'
       })
     },
     methods: {
@@ -27,5 +27,3 @@
     watch: {}
   }
 </script>
-<style lang="scss">
-</style>
