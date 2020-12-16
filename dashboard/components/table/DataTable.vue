@@ -40,9 +40,7 @@
       }
     },
     mounted() {
-      if (this.data) {
-        console.log(this.data)
-      }
+
     },
     computed: {},
     methods: {},

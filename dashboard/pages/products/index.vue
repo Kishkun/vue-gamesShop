@@ -1,6 +1,7 @@
 <template>
   <div class="container-fluid">
     <h2>Товары</h2>
+    <nuxt-link class="btn btn-success" to="products/form">Добавить продукт</nuxt-link>
     <DataTable :columns="columns" :actions="actions" :data="products.items" @onEdit="handleEdit" />
   </div>
 </template>

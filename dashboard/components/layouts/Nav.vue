@@ -11,7 +11,7 @@
   </nav>
 </template>
 <script>
-  import NavItem from '../NavItem';
+  import NavItem from '../navbar/NavItem';
 
   export default {
     name: 'Nav',

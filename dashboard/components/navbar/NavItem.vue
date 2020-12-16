@@ -24,7 +24,7 @@
   }
 </script>
 <style scoped lang="scss">
-  @import './assets/style/global';
+  @import '../../assets/style/global';
 
   .nav-home__item {
     margin-bottom: 10px;
