@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <Logo />
+  <div class="container-fluid">
+
   </div>
 </template>
 

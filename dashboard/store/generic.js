@@ -13,7 +13,6 @@ const crudStore = ({name, url}) => {
       async FETCH_ALL({commit}) {
         try {
           const items = await genericService.fetchAll();
-          console.log(items)
           commit('FETCH_ITEMS_SUCCESS', items)
         } catch (err) {
           commit('FETCH_ITEMS_FAIL', {

@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="container-fluid">
     <h2>footer</h2>
   </footer>
 </template>
@@ -20,8 +20,7 @@
   @import './../../assets/style/global';
 
   footer {
-    background: $footer-bg ;
-    padding: 0.5rem;
+    background: $footer-bg;
     height: 10%;
   }
 </style>
