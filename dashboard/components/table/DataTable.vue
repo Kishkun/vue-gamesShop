@@ -14,8 +14,13 @@
       <slot :row="item">
         <td>{{iItem + 1}}</td>
         <td v-for="({key}, iTd) in columns" :key="`column-${iTd}`">{{item[key]}}</td>
-        <td v-for="(action, iAction) in actions" :key="`action-${iAction}`">
-          <button :class="action.className" @click="$emit(action.emit, {id: item[action.keyItem]})">{{action.label}}</button>
+        <td>
+          <button
+              v-for="(action, iAction) in actions"
+              :key="`action-${iAction}`"
+              :class="action.className"
+              @click="$emit(action.emit, {id: item[action.actionKey]})"
+          >{{action.label}}</button>
         </td>
       </slot>
     </tr>
@@ -38,13 +43,7 @@
         type: Array,
         default: () => ([])
       }
-    },
-    mounted() {
-
-    },
-    computed: {},
-    methods: {},
-    watch: {}
+    }
   }
 </script>
 <style scoped lang="scss">

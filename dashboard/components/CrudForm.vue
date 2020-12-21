@@ -46,15 +46,13 @@
     computed: {},
     methods: {
       async validate() {
-        console.log('form validate');
         const errors = await this.$refs.form.validate();
-        const isValid = errors.length !== 0;
+        const isValid = errors.length === 0;
         if (isValid) {
           this.$emit('onSubmit', this.formModel);
         }
       },
       onUpdate(val, field) {
-        console.log('form update');
         this.$emit(`on${field}Update`, val);
       },
     },

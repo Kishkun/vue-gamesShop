@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid p-4">
     <h2>This is Categories page</h2>
   </div>
 </template>

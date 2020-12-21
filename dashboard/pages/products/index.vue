@@ -1,8 +1,10 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid p-4">
     <h2>Товары</h2>
-    <nuxt-link class="btn btn-success" to="products/form">Добавить продукт</nuxt-link>
-    <DataTable :columns="columns" :actions="actions" :data="products.items" @onEdit="handleEdit" />
+    <Card>
+      <nuxt-link class="btn btn-success mt-1 mb-3" to="products/form">Добавить продукт</nuxt-link>
+      <DataTable :columns="columns" :actions="actions" :data="products.items" @onEdit="handleEdit" @onDelete="handleDelete" />
+    </Card>
   </div>
 </template>
 <script>
@@ -10,13 +12,14 @@
 
   // components
   import DataTable from '../../components/table/DataTable';
+  import Card from '../../components/Card/Card';
 
   // data
   import {columns, actions} from './setup';
 
   export default {
     name: 'ProductsPage',
-    components: {DataTable},
+    components: {DataTable, Card},
     props: {},
     data: () => ({
       columns,
@@ -32,10 +35,14 @@
     },
     methods: {
       ...mapActions({
-        fetchProducts: 'products/FETCH_ALL'
+        fetchProducts: 'products/FETCH_ALL',
+        deleteProduct: 'products/DELETE'
       }),
-      handleEdit() {
-        console.log('edit btn')
+      handleEdit({id}) {
+        this.$router.push(`/products/form/${id}`)
+      },
+      handleDelete({id}) {
+        this.deleteProduct(id)
       }
     },
     watch: {}

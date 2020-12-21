@@ -1,13 +1,11 @@
 <template>
-  <div class="container-fluid p-4">
-    <h2>This is home page</h2>
-  </div>
+    <div class="card p-3">
+        <slot></slot>
+    </div>
 </template>
-
 <script>
   export default {
-    name: 'Home',
-    components: {},
+    name: 'Card',
     props: {},
     data: () => ({}),
     mounted() {
@@ -18,7 +16,3 @@
     watch: {}
   }
 </script>
-
-<style lang="scss">
-
-</style>

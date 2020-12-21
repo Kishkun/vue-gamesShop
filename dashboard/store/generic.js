@@ -57,6 +57,7 @@ const crudStore = ({name, url}) => {
       async DELETE({commit}, id) {
         try {
           const item = await genericService.delete(id);
+          console.log(item)
           commit('DELETE_SUCCESS', item)
         } catch (err) {
           commit('DELETE_FAIL', {
