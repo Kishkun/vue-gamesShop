@@ -42,6 +42,7 @@
         this.$router.push(`/products/form/${id}`)
       },
       handleDelete({id}) {
+        // delete
         this.deleteProduct(id)
       }
     },
